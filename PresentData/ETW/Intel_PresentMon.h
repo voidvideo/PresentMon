@@ -26,13 +26,13 @@ enum class Level : uint8_t {
 
 // Event descriptors:
 #define EVENT_DESCRIPTOR_DECL(name_, id_, version_, channel_, level_, opcode_, task_, keyword_) struct name_ { \
-    static uint16_t const Id      = id_; \
-    static uint8_t  const Version = version_; \
-    static uint8_t  const Channel = channel_; \
-    static uint8_t  const Level   = level_; \
-    static uint8_t  const Opcode  = opcode_; \
-    static uint16_t const Task    = task_; \
-    static auto const Keyword = static_cast<::Intel_PresentMon::Keyword>(keyword_); \
+    static constexpr uint16_t Id      = id_; \
+    static constexpr uint8_t Version = version_; \
+    static constexpr uint8_t Channel = channel_; \
+    static constexpr uint8_t Level   = level_; \
+    static constexpr uint8_t Opcode  = opcode_; \
+    static constexpr uint16_t Task    = task_; \
+    static constexpr auto Keyword = static_cast<::Intel_PresentMon::Keyword>(keyword_); \
 }
 
 EVENT_DESCRIPTOR_DECL(AppInputSample_Info, 0x003a, 0x00, 0x00, 0x04, 0x00, 0x003a, 0x0000000000000020);

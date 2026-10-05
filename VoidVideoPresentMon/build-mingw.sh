@@ -27,6 +27,14 @@ done
 
 "$archiver" rcs "$stage/lib/libVoidVideoPresentMon.a" "$objects"/*.o
 
+# Link a real consumer with the same LTO/static-library combination used by
+# VoidVideo releases. This catches generated ETW descriptor declarations that
+# compile into the archive but do not provide a definition at final link time.
+"$compiler" -std=c++23 -fms-extensions -D_WIN32 -flto \
+  -I"$root" "$root/VoidVideoPresentMon/lto-link-smoke.cpp" \
+  "$stage/lib/libVoidVideoPresentMon.a" -ltdh -ladvapi32 \
+  -static-libgcc -static-libstdc++ -static -o "$output/lto-link-smoke.exe"
+
 cp -a "$root/PresentData" "$stage/include/PresentData"
 rm -f "$stage/include/PresentData"/*.cpp
 rm -f "$stage/include/PresentData"/*.vcxproj "$stage/include/PresentData"/*.vcxproj.filters

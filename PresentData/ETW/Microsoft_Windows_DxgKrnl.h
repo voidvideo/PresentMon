@@ -72,13 +72,13 @@ enum class Channel : uint8_t {
 
 // Event descriptors:
 #define EVENT_DESCRIPTOR_DECL(name_, id_, version_, channel_, level_, opcode_, task_, keyword_) struct name_ { \
-    static uint16_t const Id      = id_; \
-    static uint8_t  const Version = version_; \
-    static uint8_t  const Channel = channel_; \
-    static uint8_t  const Level   = level_; \
-    static uint8_t  const Opcode  = opcode_; \
-    static uint16_t const Task    = task_; \
-    static auto const Keyword = static_cast<::Microsoft_Windows_DxgKrnl::Keyword>(keyword_); \
+    static constexpr uint16_t Id      = id_; \
+    static constexpr uint8_t Version = version_; \
+    static constexpr uint8_t Channel = channel_; \
+    static constexpr uint8_t Level   = level_; \
+    static constexpr uint8_t Opcode  = opcode_; \
+    static constexpr uint16_t Task    = task_; \
+    static constexpr auto Keyword = static_cast<::Microsoft_Windows_DxgKrnl::Keyword>(keyword_); \
 }
 
 EVENT_DESCRIPTOR_DECL(AdapterAllocation_DCStart      , 0x0023, 0x03, 0x11, 0x00, 0x03, 0x0015, 0x4000000000000040);

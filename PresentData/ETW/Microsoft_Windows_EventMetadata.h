@@ -13,12 +13,12 @@ static const auto GUID = __uuidof(GUID_STRUCT);
 
 // Event descriptors:
 #define EVENT_DESCRIPTOR_DECL(name_, id_, version_, channel_, level_, opcode_, task_, keyword_) struct name_ { \
-    static uint16_t const Id      = id_; \
-    static uint8_t  const Version = version_; \
-    static uint8_t  const Channel = channel_; \
-    static uint8_t  const Level   = level_; \
-    static uint8_t  const Opcode  = opcode_; \
-    static uint16_t const Task    = task_; \
+    static constexpr uint16_t Id      = id_; \
+    static constexpr uint8_t Version = version_; \
+    static constexpr uint8_t Channel = channel_; \
+    static constexpr uint8_t Level   = level_; \
+    static constexpr uint8_t Opcode  = opcode_; \
+    static constexpr uint16_t Task    = task_; \
     static uint64_t const Keyword = keyword_; \
 };
 
