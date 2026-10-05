@@ -22,6 +22,12 @@
 #include <stdlib.h>
 #include <unordered_set>
 
+#ifndef D3DPRESENT_DONOTFLIP
+#define D3DPRESENT_DONOTFLIP 0x00000004L
+#define D3DPRESENT_FLIPRESTART 0x00000008L
+#define D3DPRESENT_FORCEIMMEDIATE 0x00000100L
+#endif
+
 static uint32_t gNextFrameId = 1;
 
 static inline uint64_t GenerateVidPnLayerId(uint32_t vidPnSourceId, uint32_t layerIndex)

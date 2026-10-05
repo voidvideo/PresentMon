@@ -12,35 +12,19 @@ permissions:
 
 jobs:
   build:
-    name: Build x64 static library
-    runs-on: windows-2025
+    name: Build x64 LLVM-mingw static library
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Build
-        shell: pwsh
+        shell: bash
         run: |
-          $msbuild = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" `
-            -latest -products * -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe |
-            Select-Object -First 1
-          if (-not $msbuild) { throw "MSBuild was not found" }
-          & $msbuild VoidVideoPresentMon\VoidVideoPresentMon.vcxproj /m /t:Build /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-      - name: Package
-        shell: pwsh
-        run: |
-          $stage = Join-Path $env:RUNNER_TEMP 'voidvideo-presentmon-x64'
-          New-Item -ItemType Directory -Force -Path "$stage\include\PresentData", "$stage\include\IntelPresentMon\CommonUtilities\win", "$stage\lib" | Out-Null
-          Copy-Item PresentData\*.hpp "$stage\include\PresentData"
-          Copy-Item PresentData\ETW "$stage\include\PresentData\ETW" -Recurse
-          Copy-Item IntelPresentMon\CommonUtilities\Hash.h "$stage\include\IntelPresentMon\CommonUtilities"
-          Copy-Item IntelPresentMon\CommonUtilities\win\WinAPI.h "$stage\include\IntelPresentMon\CommonUtilities\win"
-          Copy-Item LICENSE.txt "$stage\LICENSE.txt"
-          Copy-Item VoidVideoPresentMon\build\x64\Release\VoidVideoPresentMon.lib "$stage\lib"
+          docker run --rm -v "$GITHUB_WORKSPACE:/src" -w /src docker.io/mstorsjo/llvm-mingw:latest \
+            bash VoidVideoPresentMon/build-mingw.sh
 
       - uses: actions/upload-artifact@v4
         with:
           name: voidvideo-presentmon-x64
-          path: ${{ runner.temp }}/voidvideo-presentmon-x64
+          path: VoidVideoPresentMon/out/stage
           if-no-files-found: error

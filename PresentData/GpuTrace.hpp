@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <unordered_map>
 
-#include "etw/Microsoft_Windows_DxgKrnl.h"
+#include "ETW/Microsoft_Windows_DxgKrnl.h"
 
 struct PresentEvent;
 struct PMTraceConsumer;

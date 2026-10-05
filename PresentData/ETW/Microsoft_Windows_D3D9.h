@@ -9,7 +9,11 @@
 namespace Microsoft_Windows_D3D9 {
 
 struct __declspec(uuid("{783ACA0A-790E-4D7F-8451-AA850511C6B9}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0x783aca0a, 0x790e, 0x4d7f, {0x84, 0x51, 0xaa, 0x85, 0x05, 0x11, 0xc6, 0xb9}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     Events                               = 0x2,
@@ -32,7 +36,7 @@ enum class Channel : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Microsoft_Windows_D3D9::Keyword>(keyword_); \
 };
 
 EVENT_DESCRIPTOR_DECL(Present_Start, 0x0001, 0x00, 0x10, 0x00, 0x01, 0x0001, 0x8000000000000002)

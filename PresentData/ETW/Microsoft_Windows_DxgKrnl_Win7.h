@@ -12,6 +12,15 @@ struct __declspec(uuid("{c19f763a-c0c1-479d-9f74-22abfc3a5f0a}")) PRESENTHISTORY
 struct __declspec(uuid("{295e0d8e-51ec-43b8-9cc6-9f79331d27d6}")) QUEUEPACKET_GUID_STRUCT;
 struct __declspec(uuid("{5ccf1378-6b2c-4c0f-bd56-8eeb9e4c5c77}")) VSYNCDPC_GUID_STRUCT;
 struct __declspec(uuid("{547820fe-5666-4b41-93dc-6cfd5dea28cc}")) MMIOFLIP_GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID                = ::GUID{0x65cd4c8a, 0x0848, 0x4583, {0x92, 0xa0, 0x31, 0xc0, 0xfb, 0xaf, 0x00, 0xc0}};
+static const auto BLT_GUID            = ::GUID{0x069f67f2, 0xc380, 0x4a65, {0x8a, 0x61, 0x07, 0x1c, 0xd4, 0xa8, 0x72, 0x75}};
+static const auto FLIP_GUID           = ::GUID{0x22412531, 0x670b, 0x4cd3, {0x81, 0xd1, 0xe7, 0x09, 0xc1, 0x54, 0xae, 0x3d}};
+static const auto PRESENTHISTORY_GUID = ::GUID{0xc19f763a, 0xc0c1, 0x479d, {0x9f, 0x74, 0x22, 0xab, 0xfc, 0x3a, 0x5f, 0x0a}};
+static const auto QUEUEPACKET_GUID    = ::GUID{0x295e0d8e, 0x51ec, 0x43b8, {0x9c, 0xc6, 0x9f, 0x79, 0x33, 0x1d, 0x27, 0xd6}};
+static const auto VSYNCDPC_GUID       = ::GUID{0x5ccf1378, 0x6b2c, 0x4c0f, {0xbd, 0x56, 0x8e, 0xeb, 0x9e, 0x4c, 0x5c, 0x77}};
+static const auto MMIOFLIP_GUID       = ::GUID{0x547820fe, 0x5666, 0x4b41, {0x93, 0xdc, 0x6c, 0xfd, 0x5d, 0xea, 0x28, 0xcc}};
+#else
 static const auto GUID                = __uuidof(GUID_STRUCT);
 static const auto BLT_GUID            = __uuidof(BLT_GUID_STRUCT);
 static const auto FLIP_GUID           = __uuidof(FLIP_GUID_STRUCT);
@@ -19,6 +28,7 @@ static const auto PRESENTHISTORY_GUID = __uuidof(PRESENTHISTORY_GUID_STRUCT);
 static const auto QUEUEPACKET_GUID    = __uuidof(QUEUEPACKET_GUID_STRUCT);
 static const auto VSYNCDPC_GUID       = __uuidof(VSYNCDPC_GUID_STRUCT);
 static const auto MMIOFLIP_GUID       = __uuidof(MMIOFLIP_GUID_STRUCT);
+#endif
 
 typedef LARGE_INTEGER PHYSICAL_ADDRESS;
 

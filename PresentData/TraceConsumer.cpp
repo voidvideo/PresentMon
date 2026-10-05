@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "TraceConsumer.hpp"
+#include "MinGWCompat.hpp"
 #include "ETW/Microsoft_Windows_EventMetadata.h"
 
 namespace {

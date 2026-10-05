@@ -5,7 +5,11 @@
 namespace Microsoft_Windows_EventMetadata {
 
 struct __declspec(uuid("{bbccf6c1-6cd1-48C4-80ff-839482e37671}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0xbbccf6c1, 0x6cd1, 0x48c4, {0x80, 0xff, 0x83, 0x94, 0x82, 0xe3, 0x76, 0x71}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 // Event descriptors:
 #define EVENT_DESCRIPTOR_DECL(name_, id_, version_, channel_, level_, opcode_, task_, keyword_) struct name_ { \

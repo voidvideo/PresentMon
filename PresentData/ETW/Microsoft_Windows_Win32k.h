@@ -9,7 +9,11 @@
 namespace Microsoft_Windows_Win32k {
 
 struct __declspec(uuid("{8C416C79-D49B-4F01-A467-E56D3AA8234C}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0x8c416c79, 0xd49b, 0x4f01, {0xa4, 0x67, 0xe5, 0x6d, 0x3a, 0xa8, 0x23, 0x4c}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     AuditApiCalls                        = 0x400,
@@ -82,7 +86,7 @@ enum class Channel : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Microsoft_Windows_Win32k::Keyword>(keyword_); \
 };
 
 EVENT_DESCRIPTOR_DECL(InputDeviceRead_Stop              , 0x0049, 0x00, 0x15, 0x04, 0x02, 0x0046, 0x0400000000800000)

@@ -9,7 +9,11 @@
 namespace Microsoft_Windows_Kernel_Process {
 
 struct __declspec(uuid("{22FB2CD6-0E7B-422B-A0C7-2FAD1FD0E716}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0x22fb2cd6, 0x0e7b, 0x422b, {0xa0, 0xc7, 0x2f, 0xad, 0x1f, 0xd0, 0xe7, 0x16}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     WINEVENT_KEYWORD_PROCESS                          = 0x10,
@@ -42,7 +46,7 @@ enum class Channel : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Microsoft_Windows_Kernel_Process::Keyword>(keyword_); \
 };
 
 EVENT_DESCRIPTOR_DECL(ProcessStart_Start, 0x0001, 0x03, 0x10, 0x04, 0x01, 0x0001, 0x8000000000000010)

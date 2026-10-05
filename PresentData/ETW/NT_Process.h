@@ -8,6 +8,10 @@
 namespace NT_Process {
 
 struct __declspec(uuid("{3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0x3d6fa8d0, 0xfe05, 0x11d0, {0x9d, 0xda, 0x00, 0xc0, 0x4f, 0xd7, 0xba, 0x7c}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 }

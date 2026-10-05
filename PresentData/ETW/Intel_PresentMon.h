@@ -8,7 +8,11 @@
 namespace Intel_PresentMon {
 
 struct __declspec(uuid("{ECAA4712-4644-442F-B94C-A32F6CF8A499}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0xecaa4712, 0x4644, 0x442f, {0xb9, 0x4c, 0xa3, 0x2f, 0x6c, 0xf8, 0xa4, 0x99}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     FrameTypes   = 0x1,
@@ -28,7 +32,7 @@ enum class Level : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Intel_PresentMon::Keyword>(keyword_); \
 }
 
 EVENT_DESCRIPTOR_DECL(AppInputSample_Info, 0x003a, 0x00, 0x00, 0x04, 0x00, 0x003a, 0x0000000000000020);

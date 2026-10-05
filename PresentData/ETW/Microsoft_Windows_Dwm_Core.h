@@ -9,7 +9,11 @@
 namespace Microsoft_Windows_Dwm_Core {
 
 struct __declspec(uuid("{9E9BBA3C-2E38-40CB-99F4-9E8281425164}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0x9e9bba3c, 0x2e38, 0x40cb, {0x99, 0xf4, 0x9e, 0x82, 0x81, 0x42, 0x51, 0x64}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     Composition                           = 0x1,
@@ -52,7 +56,7 @@ enum class Channel : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Microsoft_Windows_Dwm_Core::Keyword>(keyword_); \
 }
 
 EVENT_DESCRIPTOR_DECL(MILEVENT_MEDIA_UCE_PROCESSPRESENTHISTORY_GetPresentHistory_Info, 0x0040, 0x00, 0x10, 0x05, 0x00, 0x003f, 0x8000000000000001);

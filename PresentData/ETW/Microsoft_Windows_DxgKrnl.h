@@ -8,7 +8,11 @@
 namespace Microsoft_Windows_DxgKrnl {
 
 struct __declspec(uuid("{802EC45A-1E99-4B83-9920-87C98277BA9D}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0x802ec45a, 0x1e99, 0x4b83, {0x99, 0x20, 0x87, 0xc9, 0x82, 0x77, 0xba, 0x9d}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     Base                                  = 0x1,
@@ -74,7 +78,7 @@ enum class Channel : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Microsoft_Windows_DxgKrnl::Keyword>(keyword_); \
 }
 
 EVENT_DESCRIPTOR_DECL(AdapterAllocation_DCStart      , 0x0023, 0x03, 0x11, 0x00, 0x03, 0x0015, 0x4000000000000040);

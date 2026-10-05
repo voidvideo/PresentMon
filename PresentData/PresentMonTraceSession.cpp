@@ -4,6 +4,7 @@
 #include "Debug.hpp"
 #include "PresentMonTraceConsumer.hpp"
 #include "PresentMonTraceSession.hpp"
+#include "MinGWCompat.hpp"
 
 #include "ETW/Microsoft_Windows_D3D9.h"
 #include "ETW/Microsoft_Windows_Dwm_Core.h"
@@ -401,7 +402,7 @@ PEVENT_RECORD_CALLBACK GetEventRecordCallback(bool t1, bool t2, bool t3, bool t4
               : GetEventRecordCallback<Ts..., false>(t2, t3, t4);
 }
 
-ULONG CALLBACK BufferCallback(EVENT_TRACE_LOGFILE* pLogFile)
+ULONG CALLBACK BufferCallback(EVENT_TRACE_LOGFILEW* pLogFile)
 {
     auto session = (PMTraceSession*) pLogFile->Context;
     return session->mContinueProcessingBuffers; // TRUE = continue processing events, FALSE = return out of ProcessTrace()
@@ -779,4 +780,3 @@ ULONG EnableProvidersListing(
 
     return ERROR_SUCCESS;
 }
-

@@ -9,7 +9,11 @@
 namespace Microsoft_Windows_DXGI {
 
 struct __declspec(uuid("{CA11C036-0102-4A2D-A6AD-F03CFED5D3C9}")) GUID_STRUCT;
+#if defined(__MINGW32__)
+static const auto GUID = ::GUID{0xca11c036, 0x0102, 0x4a2d, {0xa6, 0xad, 0xf0, 0x3c, 0xfe, 0xd5, 0xd3, 0xc9}};
+#else
 static const auto GUID = __uuidof(GUID_STRUCT);
+#endif
 
 enum class Keyword : uint64_t {
     Objects                         = 0x1,
@@ -36,7 +40,7 @@ enum class Channel : uint8_t {
     static uint8_t  const Level   = level_; \
     static uint8_t  const Opcode  = opcode_; \
     static uint16_t const Task    = task_; \
-    static Keyword  const Keyword = (Keyword) keyword_; \
+    static auto const Keyword = static_cast<::Microsoft_Windows_DXGI::Keyword>(keyword_); \
 };
 
 EVENT_DESCRIPTOR_DECL(PresentMultiplaneOverlay_Start, 0x0037, 0x00, 0x10, 0x00, 0x01, 0x000e, 0x8000000000000002)
