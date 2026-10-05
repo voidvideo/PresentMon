@@ -35,7 +35,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <PreprocessorDefinitions>_WIN32_WINNT=0x0601;NTDDI_VERSION=0x06010000;WIN32_LEAN_AND_MEAN;NOMINMAX;NDEBUG;_LIB;PRESENTMON_ENABLE_DEBUG_TRACE=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;PRESENTMON_ENABLE_DEBUG_TRACE=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
