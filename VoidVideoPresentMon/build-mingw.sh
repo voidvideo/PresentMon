@@ -30,8 +30,8 @@ done
 cp -a "$root/PresentData" "$stage/include/PresentData"
 rm -f "$stage/include/PresentData"/*.cpp
 rm -f "$stage/include/PresentData"/*.vcxproj "$stage/include/PresentData"/*.vcxproj.filters
-cp -a "$root/IntelPresentMon" "$stage/include/IntelPresentMon"
-find "$stage/include/IntelPresentMon" -type f ! -name Hash.h ! -path '*/win/WinAPI.h' -delete
-find "$stage/include/IntelPresentMon" -type d -empty -delete
+mkdir -p "$stage/include/IntelPresentMon/CommonUtilities/win"
+cp "$root/IntelPresentMon/CommonUtilities/Hash.h" "$stage/include/IntelPresentMon/CommonUtilities/"
+cp "$root/IntelPresentMon/CommonUtilities/win/WinAPI.h" "$stage/include/IntelPresentMon/CommonUtilities/win/"
 cp "$root/LICENSE.txt" "$stage/LICENSE.txt"
 cp "$root/VoidVideoPresentMon/meson.build" "$stage/meson.build"
