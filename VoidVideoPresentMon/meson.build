@@ -1,4 +1,4 @@
-project('voidvideo-presentmon', 'cpp', version: '2.3.1-2')
+project('voidvideo-presentmon', 'cpp', version: '2.3.1-4')
 
 if host_machine.system() != 'windows' or host_machine.cpu_family() != 'x86_64'
   error('voidvideo-presentmon supplies only the Windows x86_64 LLVM-mingw static library')
